@@ -2,7 +2,7 @@ name: [Develop]_Bump-Lint-Test_messenger-services
 
 on:
   push:
-    paths :
+    paths:
       - "calendar-service/**"
       - "github/workflows/calendar-service-develop.yaml"
     branches: [ develop ]
