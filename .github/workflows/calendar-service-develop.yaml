@@ -1,17 +1,16 @@
-name: CI/CD
+name: Bump / Lint / Test develop Branches for messenger-services
 
 on:
   push:
     branches: [ develop ]
 
-defaults:
-  run:
-    working-directory: ./messenger-service
-
 jobs:
   bump-version:
     name: "Bump Version on master"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: messenger-service
 
     steps:
       - name: "Checkout source code"
