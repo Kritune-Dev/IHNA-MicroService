@@ -1,3 +1,4 @@
 /node_modules
+/coverage
 src/config/credentials.json
 src/config/token.json
