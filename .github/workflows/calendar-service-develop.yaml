@@ -4,6 +4,10 @@ on:
   push:
     branches: [ develop ]
 
+defaults:
+  run:
+    working-directory: messenger-service
+
 jobs:
   bump-version:
     name: "Bump Version on master"
