@@ -1,28 +1,31 @@
-name: Bump / Lint / Test develop Branches for messenger-services
+name: [Develop]_Bump-Lint-Test_messenger-services
 
 on:
   push:
+    paths :
+      - "calendar-service/**"
+      - "github/workflows/calendar-service-develop.yaml"
     branches: [ develop ]
 
 jobs:
   bump-version:
     name: "Bump Version on master"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: messenger-service
 
     steps:
       - name: "Checkout source code"
         uses: "actions/checkout@v2"
         with:
           ref: ${{ github.ref }}
+
       - name: "cat package.json"
-        run: cat ./package.json
+        run: cat calendar-service/package.json
+
       - name: "Setup Node.js"
         uses: "actions/setup-node@v1"
         with:
           node-version: 12
+
       - name: "Automated Version Bump"
         id: version-bump
         uses: "phips28/gh-action-bump-version@master"
@@ -30,8 +33,10 @@ jobs:
           tag-prefix: ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: "cat package.json"
-        run: cat ./package.json
+        run: cat calendar-service/package.json
+
       - name:  'Output Step'
         env:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
@@ -56,13 +61,19 @@ jobs:
         uses: actions/checkout@master
 
       - name: Install 🔧
-        run: npm ci
+        run: |-
+          cd calendar-service
+          npm ci
       
       - name: Lint 🧐
-        run: npm run lint
+        run: |-
+          cd calendar-service
+          npm run lint
 
       - name: Test 🚨
-        run: npm test
+        run: |-
+          cd calendar-service
+          npm test
 
       - name: Upload coverage to Codecov 🌂
         uses: codecov/codecov-action@v1
