@@ -1,0 +1,57 @@
+#%RAML 1.0
+title: CalendarService
+version: v1
+baseUri: ihna-service.com/api/CalendarService
+
+types:
+  Course:
+    properties:
+      id: string
+      title: string
+      type: string
+      location: string
+      prof: string
+      unit: number
+      description: string
+      dateStart: datetime
+      dateEnd: datetime
+      duree: string
+
+    example:
+      id: "123"
+      title: "Sémio musculo-squel."
+      type: "Promotion"
+      location: "CM - Salle C"
+      prof: "Mr Rousseau"
+      unit: "UE 2.5"
+      description: "Description :Sémio musculo-squel. Promotion M. ROUSSEAU UE 2.5 - 002 50520 CM - Salle C Sémiologie traumatologique"
+      dateStart: "Vendredi, 29 janvier à 8 heures 30"
+      dateEnd: "Vendredi, 29 janvier à 10 heures 30"
+      duree: "2 heures"
+
+  DayCourses:
+    type: Course []
+  
+  WeekCourses:
+    type: DayCourse []
+
+
+
+resourceTypes:
+  Collection:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: <<item>>
+
+/calendar:
+  /week:
+    type:  { Collection: {item : WeekCourses } } 
+
+  /day:
+    type:  { Collection: {item : DayCourses } }
+
+  /{id}:
+    type:  { Collection: {item : Course } }

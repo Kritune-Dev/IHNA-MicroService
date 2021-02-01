@@ -12,4 +12,4 @@ We’ll use a simple NodeJS service with a MongoDB for our backend.
 
 ### Services
 
-- [CalendarService](./calendar-service)
+- [CalendarService](./services/calendar-service)

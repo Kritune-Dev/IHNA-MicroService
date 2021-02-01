@@ -1,0 +1,29 @@
+name: "CI/CD_calendar-service-wip_master"
+
+on:
+  push:
+    branches: [ develop ]
+    paths:
+      - "services/calendar-service-wip/**"
+      - ".github/workflows/calendar-service-wip_master.yaml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: calendar-service-wip
+
+    
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@master
+
+      - name: Install 🔧
+        run: npm ci
+      
+      - name: Lint 🧐
+        run: npm run lint
+
+      - name: Test 🚨
+        run: npm test
