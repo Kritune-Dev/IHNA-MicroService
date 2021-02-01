@@ -12,4 +12,4 @@ We’ll use a simple NodeJS service with a MongoDB for our backend.
 
 ### Services
 
-- [CalendarService](./services/calendar-service) ![calendar-service-CI/CD](https://github.com/Kritune-Dev/IHNA-MicroService/workflows/calendar-service-CI/CD/badge.svg)
+- [CalendarService](./services/calendar-service) ![Calendar-Service-CI/CD](https://github.com/Kritune-Dev/IHNA-MicroService/workflows/calendar-service-CI/CD/badge.svg)
