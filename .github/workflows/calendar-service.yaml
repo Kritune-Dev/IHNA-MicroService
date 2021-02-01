@@ -7,27 +7,6 @@ on:
       - ".github/workflows/calendar-service.yaml"
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./services/calendar-service
-
-    
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@master
-
-      - name: Install 🔧
-        run: npm install
-      
-      - name: Lint 🧐
-        run: npm run lint
-
-      - name: Test 🚨
-        run: npm test
-
-jobs:
   bump-version:
     name: "Bump Version on master"
     runs-on: ubuntu-latest
