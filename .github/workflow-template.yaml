@@ -5,7 +5,7 @@ on:
     branches: [ tryworkflow ]
     paths:
       - "services/{{SERVICE}}/**"
-      - ".github/workflows/{{SERVICE}}_master.yaml"
+      - ".github/workflows/{{SERVICE}}.yaml"
 
 jobs:
   test:

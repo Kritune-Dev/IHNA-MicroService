@@ -5,7 +5,7 @@ on:
     branches: [ tryworkflow ]
     paths:
       - "services/calendar-service-wip/**"
-      - ".github/workflows/calendar-service-wip_master.yaml"
+      - ".github/workflows/calendar-service-wip.yaml"
 
 jobs:
   test:
