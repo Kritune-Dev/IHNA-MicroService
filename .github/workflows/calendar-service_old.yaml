@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: calendar-service_old
+        working-directory: ./services/calendar-service_old
 
     
     steps:
