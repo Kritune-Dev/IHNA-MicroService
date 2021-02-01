@@ -2,7 +2,7 @@ name: "CI/CD_calendar-service_old_master"
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ tryworkflow ]
     paths:
       - "services/calendar-service_old/**"
       - ".github/workflows/calendar-service_old_master.yaml"

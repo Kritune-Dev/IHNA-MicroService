@@ -2,7 +2,7 @@ name: "CI/CD_{{SERVICE}}_master"
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ tryworkflow ]
     paths:
       - "services/{{SERVICE}}/**"
       - ".github/workflows/{{SERVICE}}_master.yaml"
