@@ -17,26 +17,26 @@ exports.packageParseInformation = (req) => {
 
 // eslint-disable-next-line no-extend-native
 String.prototype.toHHMMSS = function () {
-  var secNum = parseInt(this, 10) // don't forget the second param
-  var hours = Math.floor(secNum / 3600)
-  var minutes = Math.floor((secNum - (hours * 3600)) / 60)
-  var seconds = secNum - (hours * 3600) - (minutes * 60)
+  const secNum = parseInt(this, 10) // don't forget the second param
+  let hours = Math.floor(secNum / 3600)
+  let minutes = Math.floor((secNum - (hours * 3600)) / 60)
+  let seconds = secNum - (hours * 3600) - (minutes * 60)
 
   if (hours < 10) { hours = '0' + hours }
   if (minutes < 10) { minutes = '0' + minutes }
   if (seconds < 10) { seconds = '0' + seconds }
-  var time = hours + ':' + minutes + ':' + seconds
+  const time = hours + ':' + minutes + ':' + seconds
   return time
 }
 
 function getUptime () {
-  var time = process.uptime()
-  var uptime = (time + '').toHHMMSS()
+  const time = process.uptime()
+  const uptime = (time + '').toHHMMSS()
   return uptime
 }
 
 function getGitCommit () {
-  var revision = require('child_process')
+  const revision = require('child_process')
     .execSync('git rev-parse HEAD')
     .toString().trim()
   return revision

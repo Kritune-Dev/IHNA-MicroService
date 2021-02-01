@@ -1,8 +1,7 @@
-name: "CI/CD_{{SERVICE}}_master"
+name: "{{SERVICE}}-CI/CD"
 
 on:
   push:
-    branches: [ tryworkflow ]
     paths:
       - "services/{{SERVICE}}/**"
       - ".github/workflows/{{SERVICE}}.yaml"
@@ -15,6 +14,69 @@ jobs:
         working-directory: ./services/{{SERVICE}}
 
     
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@master
+
+      - name: Install 🔧
+        run: npm install
+      
+      - name: Lint 🧐
+        run: npm run lint
+
+      - name: Test 🚨
+        run: npm test
+
+jobs:
+  bump-version:
+    name: "Bump Version on master"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./services/{{SERVICE}}
+
+    steps:
+      - name: "Checkout source code"
+        uses: "actions/checkout@v2"
+        with:
+          ref: ${{ github.ref }}
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name: "Setup Node.js"
+        uses: "actions/setup-node@v1"
+        with:
+          node-version: 12
+      - name: "Automated Version Bump"
+        id: version-bump
+        uses: "phips28/gh-action-bump-version@master"
+        with:
+          tag-prefix: ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name:  'Output Step'
+        env:
+          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
+        run: echo "new tag $NEW_TAG" 
+    
+      - name: Bump version and push tag 🆚
+        uses: anothrNick/github-tag-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: patch
+
+  build:
+    name: Build (Lint / Test / Codecov)
+    runs-on: ubuntu-latest
+    needs: bump-version
+    defaults:
+      run:
+        working-directory: ./services/{{SERVICE}}
+    env: 
+      NODE_ENV: test
+
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@master

@@ -3,7 +3,7 @@ const googleAuth = require('google-auth-library')
 const path = require('path')
 const { google } = require('googleapis')
 
-var auth
+let auth
 
 exports.connect = () => {
   const googleSecrets = JSON.parse(fs.readFileSync(path.resolve('./src/config/credentials.json'))).installed
@@ -20,5 +20,5 @@ exports.connect = () => {
 }
 
 exports.getCalendar = () => {
-  return google.calendar({version: 'v3', auth})
+  return google.calendar({ version: 'v3', auth })
 }

@@ -2,16 +2,6 @@ const httpStatus = require('http-status')
 const CallApiService = require('../services/callApi.service')
 const InformationService = require('../services/information.service')
 
-exports.me = (req, res, next) => {
-  try {
-    const { name } = req.query
-    const response = CallApiService.greetUser(name)
-    res.status(httpStatus.OK).json(response)
-  } catch (e) {
-    next(e)
-  }
-}
-
 exports.getStatus = (req, res, next) => {
   try {
     const response = InformationService.packageParseInformation(req)
