@@ -11,6 +11,7 @@ jobs:
     name: "Bump Version on master"
     runs-on: ubuntu-latest
 
+    steps:
       - name: "Automated Version Bump"
         id: version-bump
         uses: "phips28/gh-action-bump-version@master"
